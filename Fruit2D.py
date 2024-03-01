@@ -4,7 +4,7 @@ import gymnasium as gym
 from gymnasium import spaces
 
 class FruitEnvironment(gym.Env):
-    metadata = {"render_modes": ["human", "rgb_array"], "render_fps": 30}
+    metadata = {"render_modes": ["human"], "render_fps": 30}
 
     def __init__(self, render_mode=None, window_size=200, player_size=30, fruit_size=20):
         """
@@ -142,19 +142,19 @@ class FruitEnvironment(gym.Env):
             pygame.display.flip()
             self.clock.tick(self.metadata["render_fps"])
 
-        elif self.render_mode == "rgb_array":
-            frame = np.ones((self.window_size, self.window_size, 3), dtype=np.uint8) * 255
-            frame[
-                int(self._target_location[1] - self.fruit_size / 2):int(self._target_location[1] + self.fruit_size / 2),
-                int(self._target_location[0] - self.fruit_size / 2):int(self._target_location[0] + self.fruit_size / 2),
-                :
-            ] = [255, 0, 0]
-            frame[
-                int(self._agent_location[1] - self.player_size / 2):int(self._agent_location[1] + self.player_size / 2),
-                int(self._agent_location[0] - self.player_size / 2):int(self._agent_location[0] + self.player_size / 2),
-                :
-            ] = [0, 0, 0]
-            return frame
+        # elif self.render_mode == "rgb_array":
+        #     frame = np.ones((self.window_size, self.window_size, 3), dtype=np.uint8) * 255
+        #     frame[
+        #         int(self._target_location[1] - self.fruit_size / 2):int(self._target_location[1] + self.fruit_size / 2),
+        #         int(self._target_location[0] - self.fruit_size / 2):int(self._target_location[0] + self.fruit_size / 2),
+        #         :
+        #     ] = [255, 0, 0]
+        #     frame[
+        #         int(self._agent_location[1] - self.player_size / 2):int(self._agent_location[1] + self.player_size / 2),
+        #         int(self._agent_location[0] - self.player_size / 2):int(self._agent_location[0] + self.player_size / 2),
+        #         :
+        #     ] = [0, 0, 0]
+        #     return frame
         
     def close(self):
         """
